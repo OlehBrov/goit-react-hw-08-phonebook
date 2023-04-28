@@ -1,15 +1,15 @@
-import { useDispatch } from 'react-redux';
-import { deleteContactThunk } from 'redux/contactsAPI';
+
+import { useDeleteContactsMutation } from 'redux/contactsAPI';
 import styled from 'styled-components';
 export const ContactItem = props => {
-    const dispatch = useDispatch();
 
+  const [onDelete] = useDeleteContactsMutation()
   return (
     <ListItem key={props.id}>
       Name: {props.name} Phone: {props.number}
       <DeleteButton
         type="button"
-        onClick={() => dispatch(deleteContactThunk(props.id))}
+        onClick={() => onDelete(props.id)}
       >
         Delete
       </DeleteButton>

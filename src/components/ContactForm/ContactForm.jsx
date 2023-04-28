@@ -3,38 +3,54 @@ import { Formik, Form, ErrorMessage } from 'formik';
 import { useState } from 'react';
 import { Input } from 'components/Filter/Filter';
 import styled from 'styled-components';
+import {
+  useAddContactsMutation,
+  useGetAllContactsQuery,
+} from 'redux/contactsAPI';
 
 // const AddContactSchema = Yup.object().shape({
 //   name: Yup.string().required(),
 //   number: Yup.number().required(),
 // });
 
+export const ContactForm = () => {
+  const { data: contacts, isFetching, isLoading } = useGetAllContactsQuery();
+  const [toAddContact, result] = useAddContactsMutation()
 
-export const ContactForm = ({ addContact }) => {
   const [name, setName] = useState('');
   const [phone, setNumber] = useState('');
-
-  const handleSubmit = (values, { resetForm }) => {
-    addContact({ name, phone });
-    setName('');
-    setNumber('');
-  };
 
   const handleChange = e => {
     const { name, value } = e.target;
     if (name === 'name') setName(value);
     if (name === 'phone') setNumber(value);
   };
-//   const advancedSchema = Yup.object().shape({
-//   name: Yup
-//     .string()
-//     .min(3, "Username must be at least 3 characters long")
-//     .required("Name is Required"),
-//   number: Yup
-//     .string()
-//     .required("Number is Required"),
-// });
+  //   const advancedSchema = Yup.object().shape({
+  //   name: Yup
+  //     .string()
+  //     .min(3, "Username must be at least 3 characters long")
+  //     .required("Name is Required"),
+  //   number: Yup
+  //     .string()
+  //     .required("Number is Required"),
+  // });
 
+  const checkEqualContact = contact => {
+    return contacts.some(
+      el => el.name.toLowerCase() === contact.name.toLowerCase()
+    );
+  };
+  
+  const addContactCheck = contact => {
+    if (!checkEqualContact(contact)) {
+    toAddContact(contact);
+    } else alert('Such contact already exists');
+  };
+  const handleSubmit = (values, { resetForm }) => {
+    addContactCheck({ name, phone });
+    setName('');
+    setNumber('');
+  };
   return (
     <Formik
       initialValues={{ name: '', phone: '' }}
