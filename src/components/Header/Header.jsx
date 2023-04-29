@@ -1,14 +1,18 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+
+import { useDispatch } from 'react-redux';
+import { setModal } from 'redux/ModalSlice';
 // const { NavLink } = require('react-router-dom');
 
 export const Header = () => {
+  const dispatch = useDispatch();
+  // const handleModalOpen = dispatch(setModal(true));
   return (
     <HeaderStyled>
       <HeaderContainer>
-        <NavLink to="/login">
-          LogIn
-        </NavLink>
+        <button type="button" onClick={() => dispatch(setModal(true))}>
+          LogIn{' '}
+        </button>
       </HeaderContainer>
     </HeaderStyled>
   );
@@ -30,7 +34,7 @@ export const HeaderStyled = styled.header`
   width: 100%;
 `;
 
-// const ButtonStyled = styled.NavLink`
+// const ButtonStyled = styled.button`
 //   padding: 10px 25px;
 //   border-radius: 5px;
 //   border: none;

@@ -9,7 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
-  <BrowserRouter basename="/">
+  <BrowserRouter basename="/goit-react-hw-08-phonebook">
   <Provider store={store}>
     
        {/* <PersistGate loading={'LOADING...'} persistor={persistor}> */}
