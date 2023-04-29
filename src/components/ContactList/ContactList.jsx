@@ -34,6 +34,7 @@ export function ContactList() {
 }
 
 const List = styled.ul`
+  flex-grow: 1;
   list-style: none;
   display: flex;
   flex-direction: column;
