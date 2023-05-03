@@ -51,6 +51,8 @@ export const ContactForm = () => {
     setName('');
     setNumber('');
   };
+
+
   return (
     <Formik
       initialValues={{ name: '', number: '' }}

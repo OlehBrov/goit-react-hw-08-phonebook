@@ -11,6 +11,7 @@ import { WelcomePage } from 'pages/welcomePage';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useGetAllContactsQuery } from 'redux/contactsAPI';
+import { EditItem } from './EditingComponent/EditItem';
 
 // import { useEffect } from 'react';
 
@@ -31,6 +32,7 @@ export const App = () => {
             <Route path="/welcome" element={<WelcomePage />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<ModalSignUp />} />
+           <Route path="/editContact" element={<EditItem />} />
         </Route>
       </Routes>
     </PhonebookStyled>

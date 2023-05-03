@@ -34,6 +34,17 @@ export const contactsAPI = createApi({
       }),
       invalidatesTags: ['ContactsList'],
     }),
+    editContacts: builder.mutation({
+      query(data) {
+        const { id, ...body } = data;
+        return {
+          url: `/contacts/${id}`,
+          method: 'PATCH',
+          body,
+        };
+      },
+      invalidatesTags: ['ContactsList'],
+    }),
   }),
 });
 
@@ -41,4 +52,5 @@ export const {
   useAddContactsMutation,
   useGetAllContactsQuery,
   useDeleteContactsMutation,
+  useEditContactsMutation,
 } = contactsAPI;

@@ -1,16 +1,22 @@
-
-import { useDeleteContactsMutation } from 'redux/contactsAPI';
+import { EditItem } from 'components/EditingComponent/EditItem';
+import { useNavigate } from 'react-router-dom';
+import {
+  useDeleteContactsMutation,
+} from 'redux/contactsAPI';
 import styled from 'styled-components';
-export const ContactItem = props => {
 
-  const [onDelete] = useDeleteContactsMutation()
+
+
+export const ContactItem = props => {
+  const [onDelete] = useDeleteContactsMutation();
+  const navigate = useNavigate()
   return (
     <ListItem key={props.id}>
       Name: {props.name} Phone: {props.number}
-      <DeleteButton
-        type="button"
-        onClick={() => onDelete(props.id)}
-      >
+      <DeleteButton type="button" onClick={() => navigate('/editContact', {state: {...props}})}>
+        Edit
+      </DeleteButton>
+      <DeleteButton type="button" onClick={() => onDelete(props.id)}>
         Delete
       </DeleteButton>
     </ListItem>
