@@ -18,12 +18,12 @@ export const ContactForm = () => {
   const [toAddContact, result] = useAddContactsMutation()
 
   const [name, setName] = useState('');
-  const [phone, setNumber] = useState('');
+  const [number, setNumber] = useState('');
 
   const handleChange = e => {
     const { name, value } = e.target;
     if (name === 'name') setName(value);
-    if (name === 'phone') setNumber(value);
+    if (name === 'number') setNumber(value);
   };
   //   const advancedSchema = Yup.object().shape({
   //   name: Yup
@@ -47,13 +47,13 @@ export const ContactForm = () => {
     } else alert('Such contact already exists');
   };
   const handleSubmit = (values, { resetForm }) => {
-    addContactCheck({ name, phone });
+    addContactCheck({ name, number });
     setName('');
     setNumber('');
   };
   return (
     <Formik
-      initialValues={{ name: '', phone: '' }}
+      initialValues={{ name: '', number: '' }}
       // validationSchema={advancedSchema}
       onSubmit={handleSubmit}
     >
@@ -70,10 +70,10 @@ export const ContactForm = () => {
 
         <LabelStyled htmlFor="number">Phone Number</LabelStyled>
         <Input
-          id="phone"
-          name="phone"
+          id="number"
+          name="number"
           placeholder="Enter phone number"
-          value={phone}
+          value={number}
           onChange={handleChange}
         />
         <ErrorMessage component="div" name="number" />

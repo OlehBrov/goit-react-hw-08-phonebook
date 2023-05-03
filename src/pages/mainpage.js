@@ -6,7 +6,6 @@ import styled from 'styled-components';
 
 export const MainPage = () => {
   const { data: contacts, isFetching, isLoading } = useGetAllContactsQuery();
-
   return (
     <MainView>
       <FormWrap>

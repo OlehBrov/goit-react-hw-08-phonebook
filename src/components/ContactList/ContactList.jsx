@@ -24,7 +24,7 @@ export function ContactList() {
             <ContactItem
               key={contact.id}
               name={contact.name}
-              number={contact.phone}
+              number={contact.number}
               id={contact.id}
             ></ContactItem>
           ))

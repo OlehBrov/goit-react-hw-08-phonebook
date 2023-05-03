@@ -1,18 +1,35 @@
 import styled from 'styled-components';
 
-import { useDispatch } from 'react-redux';
-import { setModal } from 'redux/ModalSlice';
+
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useLogOutMutation } from 'redux/authAPI';
 // const { NavLink } = require('react-router-dom');
 
 export const Header = () => {
-  const dispatch = useDispatch();
+  const userName = useSelector(state => state.auth.name)
+  const isAuthorized = useSelector(state => state.auth.isAuthorized)
+  const [toLogOut] = useLogOutMutation();
+
+  const navigate = useNavigate()
+  
+  const logOutHandler = () => {
+    toLogOut()
+      navigate('/welcome')
+  }
   // const handleModalOpen = dispatch(setModal(true));
   return (
     <HeaderStyled>
       <HeaderContainer>
-        <button type="button" onClick={() => dispatch(setModal(true))}>
+       {!isAuthorized && <> <button type="button" onClick={() => navigate('/login')}>
           LogIn{' '}
         </button>
+         <button type="button" onClick={() => navigate('/SignUp')}>
+          SignUp{' '}
+        </button></>}
+        {isAuthorized && <><h3>Hello, {userName} </h3>  <button type="button" onClick={()=>logOutHandler() }>
+          LogOut{' '}
+        </button></>}
       </HeaderContainer>
     </HeaderStyled>
   );

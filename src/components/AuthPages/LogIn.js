@@ -1,61 +1,49 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setModal } from 'redux/ModalSlice';
-import { useSignUpMutation } from 'redux/authAPI';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useLogInMutation } from 'redux/authAPI';
+import { useGetAllContactsQuery } from 'redux/contactsAPI';
 import styled from 'styled-components';
 
-
-export const ModalSignUp = () => {
-
-  const dispatch = useDispatch()
-// const handleModalClose = dispatch(setModal(false))
-
-  const [signUpName, setSignUpName] = useState('');
-  const [signUpEmail, setSignUpEmail] = useState('');
-  const [signUpPassword, setSignUpPassword] = useState('');
-  const [toSignUp, result] = useSignUpMutation();
+export const LogIn = () => {
+  const navigate = useNavigate();
+  const [logInEmail, setSignUpEmail] = useState('');
+  const [logInPassword, setLogInPassword] = useState('');
+  const [toLogIn] = useLogInMutation();
+  
+  
 
   const handleInput = e => {
-    if (e.target.name === 'signUpName') setSignUpName(e.target.value);
     if (e.target.name === 'signUpEmail') setSignUpEmail(e.target.value);
-    if (e.target.name === 'signUpPassword') setSignUpPassword(e.target.value);
+    if (e.target.name === 'signUpPassword') setLogInPassword(e.target.value);
   };
-
   const handleSubmit = e => {
     e.preventDefault();
-    toSignUp({
-      name: signUpName,
-      email: signUpEmail,
-      password: signUpPassword,
-    });
+    toLogIn({
+      email: logInEmail,
+      password: logInPassword,
+    }).then(()=> navigate('/'));
   };
-
   return (
     <Backdrop>
-      <button type='button' onClick={() => dispatch(setModal(false))}> Close</button>
+      <button type="button" onClick={() => navigate('/')}>
+        {' '}
+        Close
+      </button>
       <Modal>
         <form
           method="post"
-          name="signup_form"
+          name="login_form"
           autoComplete="off"
           onSubmit={handleSubmit}
         >
-          <label>
-            Name
-            <input
-              type="text"
-              name="signUpName"
-              onChange={handleInput}
-              value={signUpName}
-            />
-          </label>
           <label>
             Email
             <input
               type="email"
               name="signUpEmail"
               onChange={handleInput}
-              value={signUpEmail}
+              value={logInEmail}
             />
           </label>
 
@@ -65,7 +53,7 @@ export const ModalSignUp = () => {
               type="password"
               name="signUpPassword"
               onChange={handleInput}
-              value={signUpPassword}
+              value={logInPassword}
             />
           </label>
 
@@ -99,8 +87,9 @@ const Backdrop = styled.div`
 const Modal = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
   background-color: white;
-  width: 300px;
+  width: 400px;
   background-color: beige;
   border: 1px solid black;
 `;
