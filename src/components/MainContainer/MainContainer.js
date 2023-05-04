@@ -1,12 +1,18 @@
-import { Children } from "react"
-import styled from "styled-components"
+import Container from '@mui/material/Container';
+import styled from 'styled-components';
+// import Image from '../../images/background/brussels-gf7e1e87eb_1920.jpg';
 
-export const MainContainer = () => {
-    return <ContainerStyled>
-        {/* {Children} */}
+export const MainContainer = ({ children }) => {
+  return (
+    <ContainerStyled
+      >
+          
+      {children}
     </ContainerStyled>
-}
+  );
+};
 
 const ContainerStyled = styled.div`
-display: flex;
+background-image: url('../images/background/brussels-gf7e1e87eb_1920.jpg');
+background-size: cover;
 `

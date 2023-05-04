@@ -7,6 +7,7 @@ import {
   useAddContactsMutation,
   useGetAllContactsQuery,
 } from 'redux/contactsAPI';
+import { Box, Button, TextField, Typography } from '@mui/material';
 
 // const AddContactSchema = Yup.object().shape({
 //   name: Yup.string().required(),
@@ -15,7 +16,7 @@ import {
 
 export const ContactForm = () => {
   const { data: contacts, isFetching, isLoading } = useGetAllContactsQuery();
-  const [toAddContact, result] = useAddContactsMutation()
+  const [toAddContact, result] = useAddContactsMutation();
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -40,10 +41,10 @@ export const ContactForm = () => {
       el => el.name.toLowerCase() === contact.name.toLowerCase()
     );
   };
-  
+
   const addContactCheck = contact => {
     if (!checkEqualContact(contact)) {
-    toAddContact(contact);
+      toAddContact(contact);
     } else alert('Such contact already exists');
   };
   const handleSubmit = (values, { resetForm }) => {
@@ -52,7 +53,6 @@ export const ContactForm = () => {
     setNumber('');
   };
 
-
   return (
     <Formik
       initialValues={{ name: '', number: '' }}
@@ -60,27 +60,52 @@ export const ContactForm = () => {
       onSubmit={handleSubmit}
     >
       <Form>
-        <LabelStyled htmlFor="name">Name</LabelStyled>
-        <Input
-          id="name"
-          name="name"
-          placeholder="Enter name"
-          value={name}
-          onChange={handleChange}
-        />
-        <ErrorMessage component="div" name="name" />
+        <Box
+          sx={{
+            marginBottom: '15px',
+          }}
+        >
+          <Typography htmlFor="name" variant="h6">
+            Name
+          </Typography>
+          <TextField
+            required
+            id="name"
+            label="Enter name"
+            name="name"
+            placeholder="Please enter name"
+            onChange={handleChange}
+            value={name}
+            fullWidth
+          />
 
-        <LabelStyled htmlFor="number">Phone Number</LabelStyled>
-        <Input
-          id="number"
-          name="number"
-          placeholder="Enter phone number"
-          value={number}
-          onChange={handleChange}
-        />
-        <ErrorMessage component="div" name="number" />
+          <ErrorMessage component="div" name="name" />
+        </Box>
+        <Box
+          sx={{
+            marginBottom: '15px',
+          }}
+        >
+          <Typography htmlFor="number" variant="h6">
+            Phone Number
+          </Typography>
 
-        <AddButton type="submit">Add to contacts</AddButton>
+          <TextField
+            required
+            id="number"
+            label="Enter number"
+            name="number"
+            placeholder="Please enter name"
+            onChange={handleChange}
+            value={number}
+            fullWidth
+          />
+
+          <ErrorMessage component="div" name="number" />
+        </Box>
+        <Button type="submit" fullWidth size="lg" variant="outlined">
+          Add to contacts
+        </Button>
       </Form>
     </Formik>
   );
@@ -89,10 +114,10 @@ export const ContactForm = () => {
 const LabelStyled = styled.label`
   font-size: 25px;
 `;
-const AddButton = styled.button`
-  display: block;
-  font-weight: 700;
-  width: 100%;
-  font-size: 20px;
-  cursor: pointer;
-`;
+// const AddButton = styled(Button)`
+//   display: block;
+//   font-weight: 700;
+//   width: 100%;
+//   font-size: 20px;
+//   cursor: pointer;
+// `;

@@ -1,39 +1,61 @@
 import styled from 'styled-components';
 
-
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useLogOutMutation } from 'redux/authAPI';
+import { AppBar, Box, Button, Container, Typography } from '@mui/material';
 // const { NavLink } = require('react-router-dom');
 
 export const Header = () => {
-  const userName = useSelector(state => state.auth.name)
-  const isAuthorized = useSelector(state => state.auth.isAuthorized)
+  const userName = useSelector(state => state.auth.name);
+  const isAuthorized = useSelector(state => state.auth.isAuthorized);
   const [toLogOut] = useLogOutMutation();
 
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
+
   const logOutHandler = () => {
-    toLogOut()
-      navigate('/welcome')
-  }
+    toLogOut();
+    navigate('/welcome');
+  };
   // const handleModalOpen = dispatch(setModal(true));
   return (
-    <HeaderStyled>
-      <HeaderContainer>
-       {!isAuthorized && <> <button type="button" onClick={() => navigate('/login')}>
-          LogIn{' '}
-        </button>
-         <button type="button" onClick={() => navigate('/SignUp')}>
-          SignUp{' '}
-        </button></>}
-        {isAuthorized && <><h3>Hello, {userName} </h3>  <button type="button" onClick={()=>logOutHandler() }>
-          LogOut{' '}
-        </button></>}
-      </HeaderContainer>
-    </HeaderStyled>
+    <AppBar position="fixed">
+      <StyledContainer>
+        {!isAuthorized && (
+          <StyledBox>
+            
+            <Button color="inherit"  type="button" onClick={() => navigate('/login')}>
+              LogIn{' '}
+            </Button>
+            <Button color="inherit"  type="button" onClick={() => navigate('/SignUp')}>
+              SignUp{' '}
+            </Button>
+          </StyledBox>
+        )}
+        {isAuthorized && (
+          <>
+            <Typography variant="h3">Hello, {userName} </Typography>{' '}
+            <StyledBox>
+            <Button color="inherit"  type="button" onClick={() => logOutHandler()}>
+              LogOut{' '}
+              </Button>
+              </StyledBox>
+          </>
+        )}
+      </StyledContainer>
+    </AppBar>
   );
 };
+
+export const StyledContainer = styled(Container)`
+  display: flex;
+  padding: 15px 0 15px 0;
+`
+export const StyledBox = styled(Box)`
+  display: flex;
+margin-right: 0;
+margin-left: auto;
+`
 
 export const HeaderContainer = styled.div`
   display: flex;

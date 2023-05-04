@@ -78,7 +78,7 @@ export const EditItem = props => {
           onChange={handleChange}
           value={patchNumber}
         />
-        <Button type="submit" onClick={e => handleSubmit(e)}>
+        <Button variant='contained' type="submit" onClick={e => handleSubmit(e)}>
           Save changes
         </Button>
         <Button type="button" onClick={() => navigate('/')}>
@@ -119,32 +119,32 @@ export const EditItem = props => {
   );
 };
 
-const Backdrop = styled.div`
-  position: fixed;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(18, 17, 17, 0.3);
-  backdrop-filter: blur(5px);
-  justify-content: center;
-  align-items: center;
-  top: 0vh;
-  left: 0vw;
-  /* bottom: 0;
-  right: 0; */
-  margin: 0 auto;
-  z-index: 999;
-  /* opacity: 0; */
-  /* pointer-events: none; */
-  transition: all 0.3s;
-`;
+// const Backdrop = styled.div`
+//   position: fixed;
+//   display: flex;
+//   width: 100%;
+//   height: 100%;
+//   background-color: rgba(18, 17, 17, 0.3);
+//   backdrop-filter: blur(5px);
+//   justify-content: center;
+//   align-items: center;
+//   top: 0vh;
+//   left: 0vw;
+//   /* bottom: 0;
+//   right: 0; */
+//   margin: 0 auto;
+//   z-index: 999;
+//   /* opacity: 0; */
+//   /* pointer-events: none; */
+//   transition: all 0.3s;
+// `;
 
-const Modal = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  width: 400px;
-  background-color: beige;
-  border: 1px solid black;
-`;
+// const Modal = styled.div`
+//   position: relative;
+//   display: flex;
+//   flex-direction: column;
+//   background-color: white;
+//   width: 400px;
+//   background-color: beige;
+//   border: 1px solid black;
+// `;

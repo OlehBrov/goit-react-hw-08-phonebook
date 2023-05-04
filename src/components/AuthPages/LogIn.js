@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Box, Button, TextField, Typography } from '@mui/material';
+import { BackdropView } from 'components/SharedLayout/Backdrop';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLogInMutation } from 'redux/authAPI';
-import { useGetAllContactsQuery } from 'redux/contactsAPI';
 import styled from 'styled-components';
 
 export const LogIn = () => {
@@ -10,8 +10,13 @@ export const LogIn = () => {
   const [logInEmail, setSignUpEmail] = useState('');
   const [logInPassword, setLogInPassword] = useState('');
   const [toLogIn] = useLogInMutation();
-  
-  
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    if (logInEmail && logInPassword !== '') {
+      setIsDisabled(false);
+    } else setIsDisabled(true);
+  }, [logInEmail, logInPassword]);
 
   const handleInput = e => {
     if (e.target.name === 'signUpEmail') setSignUpEmail(e.target.value);
@@ -22,45 +27,82 @@ export const LogIn = () => {
     toLogIn({
       email: logInEmail,
       password: logInPassword,
-    }).then(()=> navigate('/'));
+    }).then(() => navigate('/'));
   };
   return (
-    <Backdrop>
-      <button type="button" onClick={() => navigate('/')}>
-        {' '}
-        Close
-      </button>
-      <Modal>
+    <BackdropView>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '8px',
+        }}
+      >
+        <Typography
+          variant="h6"
+          sx={{
+            marginBottom: '10px',
+          }}
+        >
+          Enter your Email and password below
+        </Typography>
         <form
           method="post"
           name="login_form"
           autoComplete="off"
           onSubmit={handleSubmit}
         >
-          <label>
-            Email
-            <input
-              type="email"
-              name="signUpEmail"
-              onChange={handleInput}
-              value={logInEmail}
-            />
-          </label>
+          <TextField
+            required
+            id="email-login"
+            label="E-mail"
+            name="signUpEmail"
+            placeholder="Please enter email"
+            onChange={handleInput}
+            value={logInEmail}
+            fullWidth
+            sx={{
+              marginBottom: '30px'
+            }}
+          />
+          <TextField
+            required
+            fullWidth
+            type='password'
+            id="password-login"
+            label="password"
+            name="signUpPassword"
+            placeholder="Please enter email"
+            onChange={handleInput}
+            value={logInPassword}
+          />
 
-          <label>
-            Password
-            <input
-              type="password"
-              name="signUpPassword"
-              onChange={handleInput}
-              value={logInPassword}
-            />
-          </label>
-
-          <button type="submit">Sign Up</button>
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'space-around',
+            marginTop: '40px',
+          }}>
+            <Button variant="contained" type="submit" disabled={isDisabled} sx={{
+              paddingLeft: '40px',
+              paddingRight: '40px'
+            }}>
+              Log In
+            </Button>
+            <Button
+              variant="outlined"
+              type="button"
+              sx={{
+              paddingLeft: '40px',
+              paddingRight: '40px'
+            }}
+              onClick={() => navigate('/')}
+            >
+              Close
+            </Button>
+          </Box>
         </form>
-      </Modal>
-    </Backdrop>
+      </Box>
+    </BackdropView>
   );
 };
 
@@ -90,6 +132,6 @@ const Modal = styled.div`
   flex-direction: column;
   background-color: white;
   width: 400px;
-  background-color: beige;
+  /* background-color: beige; */
   border: 1px solid black;
 `;

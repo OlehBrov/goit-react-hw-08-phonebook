@@ -4,6 +4,7 @@ import { FilterStyled } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from 'redux/FilterSlices';
 import { useGetAllContactsQuery } from 'redux/contactsAPI';
+import { TextField } from '@mui/material';
 
 export function Filter() {
   const filterValue = useSelector(state => state.filter);
@@ -12,17 +13,19 @@ export function Filter() {
   const handleChange = e => {
     dispatch(setFilter(e.target.value));
   };
-  if (contacts&& contacts.length > 0) {
+  if (contacts && contacts.length > 0) {
     return (
       <Formik initialValues={filterValue}>
         <FilterStyled>
-          <label htmlFor="searchfilter"></label>
-          <Input
-            id="searchfilter"
-            filter="filter"
-            placeholder="Search contact"
-            value={filterValue}
+          <TextField
+            id="standard-helperText"
+            label="Search contact"
+            name="search"
+            placeholder="Please enter name"
             onChange={handleChange}
+            value={filterValue}
+            fullWidth
+            // helperText="Name"
           />
         </FilterStyled>
       </Formik>

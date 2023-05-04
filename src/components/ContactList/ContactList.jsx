@@ -37,8 +37,8 @@ const List = styled.ul`
   flex-grow: 1;
   list-style: none;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 15px;
-  font-size: 20px;
+  /* font-size: 20px; */
   padding: 0;
 `;

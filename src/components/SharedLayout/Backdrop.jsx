@@ -23,7 +23,7 @@ export const BackdropView = ({ children }) => {
             fontWeight: 'bold',
             mx: 0.5,
             fontSize: 14,
-            backgroundColor: '#d8d6d6',
+            backgroundColor: '#fff',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
