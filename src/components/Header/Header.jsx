@@ -17,30 +17,47 @@ export const Header = () => {
     toLogOut();
     navigate('/welcome');
   };
-  // const handleModalOpen = dispatch(setModal(true));
+ 
   return (
     <AppBar position="fixed">
       <StyledContainer>
         {!isAuthorized && (
           <StyledBox>
-            
-            <Button color="inherit"  type="button" onClick={() => navigate('/login')}>
+            <Button
+              color="inherit"
+              type="button"
+              onClick={() => navigate('/login')}
+            >
               LogIn{' '}
             </Button>
-            <Button color="inherit"  type="button" onClick={() => navigate('/SignUp')}>
+            <Button
+              color="inherit"
+              type="button"
+              onClick={() => navigate('/SignUp')}
+            >
               SignUp{' '}
             </Button>
           </StyledBox>
         )}
         {isAuthorized && (
-          <>
-            <Typography variant="h3">Hello, {userName} </Typography>{' '}
+          <Box sx={{
+            display: 'flex'
+          }}>
+            <Typography variant="h6">Hello, {userName} </Typography>{' '}
             <StyledBox>
-            <Button color="inherit"  type="button" onClick={() => logOutHandler()}>
-              LogOut{' '}
+              <Button
+                color="inherit"
+                type="button"
+                onClick={() => logOutHandler()}
+                sx={{
+                  marginRight: '0',
+                  marginLeft: 'auto'
+                }}
+              >
+                LogOut{' '}
               </Button>
-              </StyledBox>
-          </>
+            </StyledBox>
+          </Box>
         )}
       </StyledContainer>
     </AppBar>
@@ -50,12 +67,12 @@ export const Header = () => {
 export const StyledContainer = styled(Container)`
   display: flex;
   padding: 15px 0 15px 0;
-`
+`;
 export const StyledBox = styled(Box)`
   display: flex;
-margin-right: 0;
-margin-left: auto;
-`
+  margin-right: 0;
+  margin-left: auto;
+`;
 
 export const HeaderContainer = styled.div`
   display: flex;
