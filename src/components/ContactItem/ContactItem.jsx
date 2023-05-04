@@ -1,5 +1,4 @@
 import { Box, Button, Card, Typography } from '@mui/material';
-import { EditItem } from 'components/EditingComponent/EditItem';
 import { useNavigate } from 'react-router-dom';
 import { useDeleteContactsMutation } from 'redux/contactsAPI';
 import styled from 'styled-components';
@@ -36,12 +35,7 @@ export const ContactItem = props => {
   );
 };
 
-const DeleteButton = styled.button`
-  display: block;
-  margin-right: 0;
-  margin-left: auto;
-  font-size: 20px;
-`;
+
 const ListItem = styled.li`
   display: flex;
   width: calc((100% - 45px) / 4);

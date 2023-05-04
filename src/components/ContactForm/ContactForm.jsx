@@ -1,8 +1,6 @@
 import { Formik, Form, ErrorMessage } from 'formik';
 // import * as Yup from 'yup';
 import { useState } from 'react';
-import { Input } from 'components/Filter/Filter';
-import styled from 'styled-components';
 import {
   useAddContactsMutation,
   useGetAllContactsQuery,
@@ -15,8 +13,8 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 // });
 
 export const ContactForm = () => {
-  const { data: contacts, isFetching, isLoading } = useGetAllContactsQuery();
-  const [toAddContact, result] = useAddContactsMutation();
+  const { data: contacts } = useGetAllContactsQuery();
+  const [toAddContact] = useAddContactsMutation();
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -111,9 +109,7 @@ export const ContactForm = () => {
   );
 };
 
-const LabelStyled = styled.label`
-  font-size: 25px;
-`;
+
 // const AddButton = styled(Button)`
 //   display: block;
 //   font-weight: 700;

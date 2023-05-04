@@ -4,7 +4,7 @@ import { useGetAllContactsQuery } from 'redux/contactsAPI';
 import styled from 'styled-components';
 
 export function ContactList() {
-  const { data: contacts, isFetching, isLoading } = useGetAllContactsQuery();
+  const { data: contacts } = useGetAllContactsQuery();
 
   const searchQuery = useSelector(state => state.filter);
   const contactsToRender = (contacts, searchQuery) => {

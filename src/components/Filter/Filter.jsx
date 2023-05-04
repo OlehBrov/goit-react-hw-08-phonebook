@@ -8,7 +8,7 @@ import { TextField } from '@mui/material';
 
 export function Filter() {
   const filterValue = useSelector(state => state.filter);
-  const { data: contacts, isFetching, isLoading } = useGetAllContactsQuery();
+  const { data: contacts } = useGetAllContactsQuery();
   const dispatch = useDispatch();
   const handleChange = e => {
     dispatch(setFilter(e.target.value));

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Box } from '@mui/material';
 
 export const MainPage = () => {
-  const { data: contacts, isFetching, isLoading } = useGetAllContactsQuery();
+  const { data: contacts } = useGetAllContactsQuery();
   return (
     <Box sx={{
       display: 'flex',
@@ -33,7 +33,7 @@ export const MainPage = () => {
   );
 };
 
-const MainView = styled.div``;
+
 
 const FormWrap = styled.div`
   display: flex;

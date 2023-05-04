@@ -1,8 +1,6 @@
 import {
   Box,
   Button,
-  FormControl,
-  OutlinedInput,
   TextField,
   Typography,
 } from '@mui/material';
@@ -10,7 +8,7 @@ import { BackdropView } from 'components/SharedLayout/Backdrop';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEditContactsMutation } from 'redux/contactsAPI';
-import styled from 'styled-components';
+
 
 export const EditItem = props => {
   const location = useLocation();
@@ -21,7 +19,7 @@ export const EditItem = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    //   console.log('location', location)
+   
     const patch = {
       id: location.state.id,
       name: patchName,

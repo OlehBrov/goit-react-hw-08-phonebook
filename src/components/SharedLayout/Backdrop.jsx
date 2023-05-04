@@ -1,14 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import Modal from '@mui/material/Modal';
-import { Box, Button, Typography } from '@mui/material';
-import { positions } from '@mui/system';
+import { Box } from '@mui/material';
 
 export const BackdropView = ({ children }) => {
   const navigate = useNavigate();
   return (
     <>
-      {/* <Button onClick={handleOpen}>Open modal</Button> */}
+     
       <Modal
         open={true}
         onClose={() => navigate('/')}
@@ -39,22 +37,3 @@ export const BackdropView = ({ children }) => {
   );
 };
 
-// const Backdrop = styled.div`
-//   position: fixed;
-//   display: flex;
-//   width: 100%;
-//   height: 100%;
-//   background-color: rgba(18, 17, 17, 0.3);
-//   backdrop-filter: blur(5px);
-//   justify-content: center;
-//   align-items: center;
-//   top: 0vh;
-//   left: 0vw;
-//   /* bottom: 0;
-//   right: 0; */
-//   margin: 0 auto;
-//   z-index: 999;
-//   /* opacity: 0; */
-//   /* pointer-events: none; */
-//   transition: all 0.3s;
-// `;
