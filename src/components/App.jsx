@@ -15,8 +15,6 @@ import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { MainContainer } from './MainContainer/MainContainer';
 
 
-// import { useEffect } from 'react';
-
 export const App = () => {
   const isToken = useSelector(state => state.auth.token);
  useGetAllContactsQuery(isToken ?? skipToken);

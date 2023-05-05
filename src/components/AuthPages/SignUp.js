@@ -1,9 +1,10 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { BackdropView } from 'components/SharedLayout/Backdrop';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useSignUpMutation } from 'redux/authAPI';
-
+import { useLogInMutation, useSignUpMutation } from 'redux/authAPI';
+import { addToken } from 'redux/authSlice';
 
 export const ModalSignUp = () => {
   const [signUpName, setSignUpName] = useState('');
@@ -11,6 +12,9 @@ export const ModalSignUp = () => {
   const [signUpPassword, setSignUpPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [toSignUp] = useSignUpMutation();
+  const [toLogIn] = useLogInMutation();
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
     if (signUpName && signUpEmail && signUpPassword !== '') {
@@ -29,9 +33,13 @@ export const ModalSignUp = () => {
       name: signUpName,
       email: signUpEmail,
       password: signUpPassword,
-    }).unwrap().then(navigate('/login'));
+    })
+      .unwrap()
+      .then(data => dispatch(addToken(data)))
+      .then(toLogIn({ email: signUpEmail, password: signUpPassword }))
+      .then(data => {navigate('/'); console.log('navigate')});
   };
-
+  
   return (
     <BackdropView>
       <Box
@@ -68,7 +76,7 @@ export const ModalSignUp = () => {
               marginBottom: '30px',
             }}
           />
-         
+
           <TextField
             required
             id="email-signup"
@@ -82,7 +90,7 @@ export const ModalSignUp = () => {
               marginBottom: '30px',
             }}
           />
-         
+
           <TextField
             required
             type="password"
@@ -94,7 +102,7 @@ export const ModalSignUp = () => {
             value={signUpPassword}
             fullWidth
           />
-         
+
           <Box
             sx={{
               display: 'flex',
@@ -110,7 +118,7 @@ export const ModalSignUp = () => {
                 paddingLeft: '40px',
                 paddingRight: '40px',
               }}
-              onClick={(e)=>handleSubmit(e)}
+              onClick={e => handleSubmit(e)}
             >
               Sign Up
             </Button>

@@ -11,7 +11,11 @@ const userAuthSlice = createSlice({
   name: 'authUser',
   initialState,
   reducers: {
-      
+    addToken(state, {payload}) {
+      state.token = payload.token
+      state.name = payload.user.name
+      state.isAuthorized = true
+      }
   },
   extraReducers: builder => {
     builder.addMatcher(
@@ -29,5 +33,6 @@ const userAuthSlice = createSlice({
   }
 });
 
+export const {addToken} = userAuthSlice.actions
 export const { setUserAuthSlice } = userAuthSlice.actions;
 export const userAuthSliceReducer = userAuthSlice.reducer
